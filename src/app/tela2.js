@@ -111,9 +111,14 @@ export default function ListaDb() {
             )}
             <FlatList
                 data={lista}
+                keyExtractor={(item) => String(item.id)}
                 renderItem={({ item }) => (
                     <View style={styles.itemContainer}>
-                        <Text style={styles.item}>{item.nome} {item.cor} {item.cientifico}</Text>
+                        <View style={styles.item}>
+                            <Text style={styles.textoItem}>Título: {String(item.titulo ?? "")}</Text>
+                            <Text style={styles.textoItem}>Autor: {String(item.autor ?? "")}</Text>
+                            <Text style={styles.textoItem}>Páginas: {String(item.paginas ?? "")}</Text>
+                        </View>
                         <Button title="🗑️" color="#D64545" onPress={() => excluir(item.id)} />
                         <Button title="✏️" color="#48494b" onPress={() => editar(item)} />
                     </View>
@@ -145,9 +150,11 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         backgroundColor: "#48494b",
-        color: "#FFFFFF",
         padding: 10,
         marginTop: 5,
+    },
+    textoItem: {
+        color: "#FFFFFF",
     },
     itemContainer: {
         flexDirection: "row",
